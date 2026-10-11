@@ -10,9 +10,9 @@ Kinetic brings MuJoCo dynamics, a browser studio, Gymnasium adapters and a langu
 
 ## See it in action
 
-[![Kinetic demonstration](docs/media/kinetic-demo.gif)](docs/media/kinetic-demo.mp4)
+[![Kinetic demonstration](docs/media/kinetic-demo.gif)](https://github.com/Rajneesh100/kinetic-rl-sim/raw/refs/heads/main/docs/media/kinetic-demo.mp4)
 
-[Watch the full demonstration](docs/media/kinetic-demo.mp4) · [Vehicle subject tracking](docs/media/vehicle-tracking.mp4) · [2D wind tunnel](docs/media/wind-tunnel.mp4)
+[Download the full demo (MP4)](https://github.com/Rajneesh100/kinetic-rl-sim/raw/refs/heads/main/docs/media/kinetic-demo.mp4) · [Vehicle subject tracking (MP4)](https://github.com/Rajneesh100/kinetic-rl-sim/raw/refs/heads/main/docs/media/vehicle-tracking.mp4) · [2D wind tunnel (MP4)](https://github.com/Rajneesh100/kinetic-rl-sim/raw/refs/heads/main/docs/media/wind-tunnel.mp4)
 
 These recordings show the actual studio. The **Run** button uses a scripted controller; vehicle demonstration footage shows simulation and camera behavior, not a trained policy.
 
