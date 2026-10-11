@@ -1,0 +1,231 @@
+{
+  "$defs": {
+    "FluidObstacle": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "shape": {
+          "default": "circle",
+          "enum": [
+            "circle",
+            "box",
+            "ellipse",
+            "naca0012",
+            "naca2412",
+            "polygon"
+          ],
+          "title": "Shape",
+          "type": "string"
+        },
+        "x": {
+          "default": 0.45,
+          "exclusiveMaximum": 1,
+          "exclusiveMinimum": 0,
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "default": 0.5,
+          "exclusiveMaximum": 1,
+          "exclusiveMinimum": 0,
+          "title": "Y",
+          "type": "number"
+        },
+        "width": {
+          "default": 0.2,
+          "description": "Diameter, full box/ellipse width, or airfoil chord in unit-domain coordinates.",
+          "maximum": 0.9,
+          "minimum": 0.01,
+          "title": "Width",
+          "type": "number"
+        },
+        "height": {
+          "default": 0.2,
+          "description": "Full box/ellipse/polygon height. Ignored for circles and fixed 12%-chord NACA profiles.",
+          "maximum": 0.9,
+          "minimum": 0.01,
+          "title": "Height",
+          "type": "number"
+        },
+        "angle": {
+          "default": 0.0,
+          "description": "Counterclockwise rotation in degrees about (x,y).",
+          "maximum": 180,
+          "minimum": -180,
+          "title": "Angle",
+          "type": "number"
+        },
+        "points": {
+          "anyOf": [
+            {
+              "items": {
+                "items": {
+                  "maximum": 0.5,
+                  "minimum": -0.5,
+                  "type": "number"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "type": "array"
+              },
+              "maxItems": 64,
+              "minItems": 3,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Simple polygon vertices in local [-0.5,0.5] coordinates, scaled by width/height. Do not repeat the first vertex.",
+          "title": "Points"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "FluidObstacle",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "resolution": {
+      "default": 64,
+      "maximum": 128,
+      "minimum": 16,
+      "title": "Resolution",
+      "type": "integer"
+    },
+    "timestep": {
+      "default": 0.02,
+      "maximum": 0.1,
+      "minimum": 0.001,
+      "title": "Timestep",
+      "type": "number"
+    },
+    "viscosity": {
+      "default": 0.0001,
+      "maximum": 0.1,
+      "minimum": 0,
+      "title": "Viscosity",
+      "type": "number"
+    },
+    "diffusion": {
+      "default": 1e-05,
+      "maximum": 0.1,
+      "minimum": 0,
+      "title": "Diffusion",
+      "type": "number"
+    },
+    "inflow": {
+      "default": 0.6,
+      "maximum": 3,
+      "minimum": 0,
+      "title": "Inflow",
+      "type": "number"
+    },
+    "dye_source": {
+      "default": 2.0,
+      "maximum": 20,
+      "minimum": 0,
+      "title": "Dye Source",
+      "type": "number"
+    },
+    "source_x": {
+      "default": 0.12,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Source X",
+      "type": "number"
+    },
+    "source_y": {
+      "default": 0.5,
+      "maximum": 1,
+      "minimum": 0,
+      "title": "Source Y",
+      "type": "number"
+    },
+    "source_radius": {
+      "default": 0.06,
+      "maximum": 0.3,
+      "minimum": 0.01,
+      "title": "Source Radius",
+      "type": "number"
+    },
+    "source_mode": {
+      "default": "jet",
+      "description": "Jet uses the circular source. Rake emits nine horizontal dye stripes near source_x, spanning y=0.1 to 0.9.",
+      "enum": [
+        "jet",
+        "rake"
+      ],
+      "title": "Source Mode",
+      "type": "string"
+    },
+    "dissipation": {
+      "default": 0.03,
+      "maximum": 5,
+      "minimum": 0,
+      "title": "Dissipation",
+      "type": "number"
+    },
+    "obstacle": {
+      "default": true,
+      "title": "Obstacle",
+      "type": "boolean"
+    },
+    "obstacle_x": {
+      "default": 0.45,
+      "maximum": 0.95,
+      "minimum": 0.05,
+      "title": "Obstacle X",
+      "type": "number"
+    },
+    "obstacle_y": {
+      "default": 0.5,
+      "maximum": 0.95,
+      "minimum": 0.05,
+      "title": "Obstacle Y",
+      "type": "number"
+    },
+    "obstacle_radius": {
+      "default": 0.1,
+      "maximum": 0.3,
+      "minimum": 0.01,
+      "title": "Obstacle Radius",
+      "type": "number"
+    },
+    "obstacles": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/FluidObstacle"
+          },
+          "maxItems": 16,
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Explicit obstacle objects. Null uses the legacy circle controls; an empty list creates a clean channel. Each object must occupy at least four grid cell centers and leave the outer cell ring fluid.",
+      "title": "Obstacles"
+    },
+    "iterations": {
+      "default": 60,
+      "maximum": 200,
+      "minimum": 10,
+      "title": "Iterations",
+      "type": "integer"
+    }
+  },
+  "title": "FluidConfig",
+  "type": "object"
+}

@@ -1,0 +1,152 @@
+.flow-page.tunnel-page { padding: 24px 32px 13px; background: radial-gradient(ellipse at 15% 0%, #242f37, transparent 60%), #171c21; }
+.tunnel-page .flow-title { margin-bottom: 20px; }
+.tunnel-page .flow-title h1 { font-size: 28px; letter-spacing: -.9px; margin-top: 8px; }
+.tunnel-page .flow-title p { margin-top: 7px; }
+.tunnel-page .flow-error { overflow-wrap: anywhere; max-height: 130px; overflow-y: auto; flex-shrink: 0; }
+.tunnel-header-actions { display: flex; align-items: center; gap: 10px; }
+.tunnel-header-actions .button { font-size: 10px; min-height: 35px; }
+.tunnel-page .flow-method { font-size: 8px; padding: 11px 12px; letter-spacing: .5px; }
+.tunnel-presets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; flex-shrink: 0; }
+.tunnel-preset { padding: 12px 13px; border: 1px solid #35424c; border-radius: 6px; background: #202830; text-align: left; gap: 11px; justify-content: flex-start; }
+.tunnel-preset:hover { background: #29343e; border-color: #5b6265; }
+.tunnel-preset.active { background: linear-gradient(115deg, #372d29, #27272b); border-color: #ab7157; }
+.tunnel-preset > span { display: flex; flex-direction: column; gap: 5px; min-width: 0; flex: 1; }
+.tunnel-preset small { font: 7px var(--mono); letter-spacing: 1px; color: #7c8d9c; }
+.tunnel-preset strong { color: #d5dce2; font-size: 11px; font-weight: 500; white-space: nowrap; }
+.tunnel-preset em { color: #7f919f; font-style: normal; font-size: 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tunnel-preset.active small, .tunnel-preset.active > svg:last-child { color: #e8986e; }
+.tunnel-preset > svg:last-child { color: #637889; }
+.tunnel-preset-glyph { width: 65px; height: 40px; fill: #314653; stroke: #9ab3bf; stroke-width: 1.2; }
+.tunnel-preset.active .tunnel-preset-glyph { fill: #71513d; stroke: #f6b584; }
+.tunnel-preset-glyph .glyph-lines { fill: none; stroke: #4b6875; stroke-dasharray: 2 4; opacity: .7; }
+.tunnel-page .flow-workspace { gap: 17px; grid-template-columns: minmax(0, 1fr) 290px; min-height: 480px; }
+.tunnel-page .flow-display { min-height: 0; border-color: #354550; }
+.tunnel-page .flow-canvas-wrap { min-height: 340px; }
+.tunnel-page .flow-canvas { object-fit: contain; }
+.tunnel-toolbar { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 15px; background: #1e2932; border-bottom: 1px solid #34424e; flex-shrink: 0; }
+.tunnel-field-tabs { display: flex; align-items: stretch; gap: 17px; align-self: stretch; }
+.tunnel-field-tabs button { font-size: 10px; padding: 0; color: #8498a8; border-bottom: 2px solid transparent; white-space: nowrap; }
+.tunnel-field-tabs button:hover { color: #e6d1c2; }
+.tunnel-field-tabs button.active { color: #ffad7f; border-bottom-color: #ff9465; }
+.tunnel-overlays { display: flex; align-items: center; gap: 11px; }
+.tunnel-overlays label { display: flex; align-items: center; font-size: 9px; color: #91a8b7; gap: 5px; white-space: nowrap; }
+.tunnel-overlays input { accent-color: #e9986f; width: 11px; height: 11px; margin: 0; }
+.tunnel-page .flow-overlay-top, .tunnel-page .flow-overlay-bottom, .tunnel-page .tunnel-legend, .tunnel-inlet { pointer-events: none; }
+.tunnel-page .flow-overlay-top { top: 18px; left: 19px; right: 19px; font-size: 7px; letter-spacing: .7px; }
+.tunnel-page .flow-overlay-bottom { bottom: 16px; left: 19px; right: 19px; font-size: 7px; letter-spacing: .5px; }
+.tunnel-page .flow-overlay-bottom > span:last-child { color: #8a9aab; font-size: 6px; }
+.tunnel-page .tunnel-legend { right: 20px; top: 53px; width: 146px; gap: 7px; color: #a2b0b9; }
+.tunnel-page .tunnel-legend > span:first-child { font-size: 6px; letter-spacing: .5px; }
+.tunnel-page .tunnel-legend > div { height: 4px; background: linear-gradient(90deg, #0c1520, #7f6d50, #f4cba2); }
+.tunnel-page .legend-speed > div { background: linear-gradient(90deg, #0c1826, #18516a, #1b929a, #94d19f, #fed680); }
+.tunnel-page .legend-pressure > div, .tunnel-page .legend-vorticity > div { background: linear-gradient(90deg, #42b6dd, #151d2a, #f67d52); }
+.tunnel-inlet { position: absolute; top: 47%; left: 19px; display: flex; flex-direction: column; gap: 7px; color: #ae8167; }
+.tunnel-inlet span { font: 7px var(--mono); letter-spacing: 1.3px; }
+.tunnel-inlet strong { font: 8px var(--mono); color: #8095a2; }
+.tunnel-probe { min-height: 36px; display: flex; align-items: center; gap: 9px; padding: 8px 16px; background: #141f28; color: #7f96a5; border-top: 1px solid #2e3c47; font-size: 9px; flex-shrink: 0; }
+.tunnel-probe > svg { flex-shrink: 0; color: #a0b4bd; }
+.tunnel-probe.has-sample { min-height: 48px; }
+.tunnel-probe .probe-position { font: 7px var(--mono); color: #e5ba94; white-space: nowrap; }
+.probe-values { display: flex; align-items: center; gap: 17px; margin-left: 7px; flex: 1; }
+.probe-values > span { display: flex; flex-direction: column; gap: 3px; font-size: 8px; white-space: nowrap; }
+.probe-values strong { color: #c4d3da; font: 9px var(--mono); }
+.probe-values em { color: #7f94a0; font-style: normal; font-size: 7px; }
+.tunnel-probe > .icon-button { margin-left: auto; padding: 4px; }
+.tunnel-page .flow-transport { height: 52px; min-height: 52px; background: #1e2832; padding: 0 15px; }
+.tunnel-page .flow-transport > span { font-size: 8px; }
+.tunnel-page .tunnel-top-transport { height: 42px; min-height: 42px; border-top: 0; border-bottom: 1px solid #34424e; background: #18232c; }
+.tunnel-page .tunnel-top-transport .play-button { min-height: 28px; padding-top: 6px; padding-bottom: 6px; }
+.tunnel-page .flow-settings { display: flex; flex-direction: column; overflow: hidden; min-height: 0; background: #1e2730; }
+.tunnel-page .flow-settings .inspector-heading { min-height: 44px; padding: 0 16px; display: flex; align-items: center; gap: 8px; }
+.tunnel-page .flow-settings .inspector-heading strong { font-weight: 500; font-size: 11px; }
+.tunnel-unsaved { margin-left: auto; font: 7px var(--mono); color: #e9a17b; letter-spacing: .6px; }
+.tunnel-settings-tabs { display: flex; border-bottom: 1px solid #35414b; padding: 0 16px; gap: 22px; min-height: 35px; flex-shrink: 0; }
+.tunnel-settings-tabs button { padding: 0 0 8px; align-items: end; border-bottom: 2px solid transparent; color: #8498a8; text-transform: capitalize; font-size: 10px; }
+.tunnel-settings-tabs button.active { border-bottom-color: #ee9569; color: #f0b28e; }
+.tunnel-settings-content { overflow-y: auto; min-height: 0; flex: 1; scrollbar-width: thin; scrollbar-color: #45545e transparent; }
+.tunnel-page .flow-settings .property-group { padding: 13px 16px; }
+.tunnel-page .flow-settings .property-group h3 { font-size: 9px; margin-bottom: 9px; color: #a8bac8; }
+.tunnel-page .flow-settings .field { margin-top: 8px; gap: 8px; }
+.tunnel-page .flow-settings .number-input, .tunnel-page .flow-settings .field select { width: 124px; }
+.tunnel-group-heading { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; }
+.tunnel-page .tunnel-group-heading h3 { margin: 0; }
+.tunnel-group-heading h3 span { margin-left: 6px; color: #647d8e; font: 8px var(--mono); }
+.tunnel-group-heading .icon-button { padding: 3px; color: #9cb0bd; }
+.tunnel-group-heading .tunnel-delete:hover { color: #ec9b82; }
+.tunnel-obstacle-list { display: flex; flex-direction: column; gap: 5px; max-height: 150px; overflow-y: auto; scrollbar-width: thin; }
+.tunnel-obstacle-list > button { width: 100%; background: #19222a; border: 1px solid #33434e; border-radius: 4px; padding: 8px 9px; justify-content: flex-start; gap: 10px; }
+.tunnel-obstacle-list > button.active { border-color: #795d4b; background: #302b2b; }
+.tunnel-obstacle-list > button > span:nth-child(2) { display: flex; flex-direction: column; gap: 3px; font-size: 10px; text-align: left; color: #c3cbd0; }
+.tunnel-obstacle-list small { font: 7px var(--mono); text-transform: uppercase; color: #879aaa; }
+.tunnel-obstacle-list > button > svg { margin-left: auto; color: #7b8f9b; }
+.obstacle-symbol { width: 17px; height: 17px; border: 1px solid #a7bbc0; background: #3f545e; flex-shrink: 0; }
+.obstacle-symbol.circle { border-radius: 50%; }
+.obstacle-symbol.ellipse { border-radius: 50%; height: 10px; }
+.obstacle-symbol.naca0012, .obstacle-symbol.naca2412 { height: 6px; width: 22px; border-radius: 80% 0 0 40%; transform: rotate(-10deg); }
+.obstacle-symbol.polygon { clip-path: polygon(0 0, 100% 50%, 0 100%); }
+.tunnel-note { font-size: 9px; color: #8195a4; line-height: 1.7; margin: 12px 0 0; }
+.tunnel-page .flow-apply { padding: 13px 16px 12px; border-top: 1px solid #35424e; background: #1e2730; flex-shrink: 0; }
+.tunnel-page .flow-apply .button { min-height: 34px; }
+.tunnel-page .flow-apply > p { margin-top: 8px; font-size: 8px; color: #8296a4; text-align: center; }
+.tunnel-solver-info p { font-size: 9px; line-height: 1.7; color: #8b9fac; margin-top: 10px; }
+.tunnel-page .flow-metrics { gap: 14px; margin-top: 14px; flex-shrink: 0; }
+.tunnel-page .flow-metrics > div { padding: 12px 17px; background: #202a33; }
+.tunnel-page .flow-metrics span { font-size: 8px; margin-bottom: 7px; }
+.tunnel-page .flow-metrics strong { font-size: 19px; }
+.tunnel-page .flow-metrics small { font-size: 7px; margin-left: 9px; }
+.tunnel-footnote { display: flex; align-items: center; gap: 7px; color: #768c9d; font-size: 8px; line-height: 1.5; margin-top: 12px; flex-shrink: 0; }
+.tunnel-footnote > svg { flex-shrink: 0; }
+.tunnel-footnote > span:last-child { margin-left: auto; display: flex; align-items: center; gap: 7px; white-space: nowrap; font: 6px var(--mono); letter-spacing: .7px; }
+@media (max-width: 1150px) {
+  .flow-page.tunnel-page { padding: 20px 22px 12px; }
+  .tunnel-page .flow-workspace { grid-template-columns: minmax(0, 1fr) 265px; gap: 12px; }
+  .tunnel-page .flow-method { display: none; }
+  .tunnel-preset { padding: 10px; gap: 7px; }
+  .tunnel-preset-glyph { width: 46px; }
+  .tunnel-preset em { display: none; }
+  .tunnel-field-tabs { gap: 12px; min-height: 37px; }
+  .tunnel-field-tabs button { font-size: 9px; }
+  .tunnel-toolbar { flex-wrap: wrap; padding: 0 12px; row-gap: 0; }
+  .tunnel-overlays { padding: 7px 0; }
+  .probe-values { gap: 10px; }
+  .tunnel-probe.has-sample { flex-wrap: wrap; }
+  .tunnel-probe .probe-position { font-size: 6px; }
+  .tunnel-page .flow-metrics strong { font-size: 17px; }
+}
+@media (max-height: 850px) {
+  .flow-page.tunnel-page { padding-top: 16px; }
+  .tunnel-page .flow-title { margin-bottom: 15px; }
+  .tunnel-page .flow-title h1 { font-size: 24px; margin-top: 6px; }
+  .tunnel-page .flow-title p { margin-top: 5px; font-size: 10px; }
+  .tunnel-presets { margin-bottom: 14px; }
+  .tunnel-preset { padding-top: 9px; padding-bottom: 9px; }
+  .tunnel-preset em { display: none; }
+  .tunnel-page .flow-workspace { min-height: 480px; }
+  .tunnel-page .flow-canvas-wrap { min-height: 340px; }
+  .tunnel-page .flow-metrics { margin-top: 12px; }
+  .tunnel-page .flow-metrics > div { padding: 10px 16px; }
+  .tunnel-page .flow-metrics strong { font-size: 17px; }
+  .tunnel-footnote { margin-top: 10px; }
+}
+@media (max-width: 850px) {
+  .tunnel-header-actions .button { padding: 0 10px; }
+  .tunnel-header-actions { gap: 7px; }
+  .tunnel-import-button span { display: none; }
+  .tunnel-presets { gap: 8px; }
+  .tunnel-preset-glyph { width: 36px; }
+  .tunnel-preset strong { font-size: 10px; }
+  .tunnel-preset > svg:last-child { display: none; }
+  .tunnel-page .flow-workspace { grid-template-columns: minmax(0, 1fr) 240px; }
+  .tunnel-page .flow-settings .number-input, .tunnel-page .flow-settings .field select { width: 106px; }
+  .tunnel-inlet { display: none; }
+  .tunnel-page .flow-overlay-top { left: 12px; right: 12px; font-size: 6px; }
+  .tunnel-page .flow-overlay-bottom { left: 12px; right: 12px; }
+  .tunnel-page .flow-overlay-bottom > span:last-child { max-width: 105px; text-align: right; line-height: 1.6; }
+  .tunnel-page .tunnel-legend { right: 12px; top: 43px; width: 125px; }
+  .tunnel-page .flow-transport > span { display: none; }
+  .tunnel-page .flow-metrics { gap: 9px; }
+  .tunnel-page .flow-metrics > div { padding: 10px 12px; }
+  .tunnel-page .flow-metrics strong { font-size: 15px; }
+  .tunnel-page .flow-metrics small { display: block; margin: 5px 0 0; }
+  .tunnel-footnote > span:last-child { display: none; }
+}

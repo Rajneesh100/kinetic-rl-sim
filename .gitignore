@@ -1,0 +1,17 @@
+.venv/
+.cache/
+__pycache__/
+.pytest_cache/
+*.egg-info/
+web/node_modules/
+web/dist/
+data/
+artifacts/
+.DS_Store
+MUJOCO_LOG.TXT
+web/*.tsbuildinfo
+
+# Local credentials
+.env
+.env.*
+!.env.example

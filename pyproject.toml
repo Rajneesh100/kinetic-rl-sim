@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rl-sim"
+version = "0.1.0"
+description = "MuJoCo physics simulation for reinforcement learning, robotics, and interactive 2D fluid experiments"
+requires-python = ">=3.11"
+dependencies = ["mujoco>=3.3,<4", "numpy>=2,<3", "fastapi>=0.115,<1", "uvicorn[standard]>=0.34,<1", "pydantic>=2.10,<3", "gymnasium>=1.1,<2", "httpx>=0.28,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10"]
+train = ["stable-baselines3>=2.6,<3"]
+gpu = ["mujoco-mjx>=3.3,<4", "jax[cuda12]>=0.6; sys_platform == 'linux'"]
+
+[project.scripts]
+rl-sim = "rl_sim.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Rajneesh100/kinetic-rl-sim"
+Documentation = "https://github.com/Rajneesh100/kinetic-rl-sim/blob/main/README.md"
+Issues = "https://github.com/Rajneesh100/kinetic-rl-sim/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["rl_sim"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

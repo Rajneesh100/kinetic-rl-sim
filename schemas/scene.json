@@ -1,0 +1,398 @@
+{
+  "$defs": {
+    "ObjectConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "pattern": "^[A-Za-z][A-Za-z0-9 _.-]*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "kind": {
+          "default": "box",
+          "enum": [
+            "box",
+            "sphere",
+            "cylinder",
+            "capsule"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "size": {
+          "description": "MuJoCo sizes: box half-extents; sphere radius=size[0]; cylinder/capsule radius=size[0], half-length=size[1].",
+          "items": {
+            "exclusiveMinimum": 0,
+            "maximum": 1000,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Size",
+          "type": "array"
+        },
+        "position": {
+          "items": {
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Position",
+          "type": "array"
+        },
+        "rotation": {
+          "description": "XYZ Euler angles, radians.",
+          "items": {
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Rotation",
+          "type": "array"
+        },
+        "mass": {
+          "default": 1.0,
+          "maximum": 100000,
+          "minimum": 0.001,
+          "title": "Mass",
+          "type": "number"
+        },
+        "static": {
+          "default": false,
+          "title": "Static",
+          "type": "boolean"
+        },
+        "color": {
+          "items": {
+            "maximum": 1,
+            "minimum": 0,
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Color",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "ObjectConfig",
+      "type": "object"
+    },
+    "PhysicsConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "gravity": {
+          "items": {
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Gravity",
+          "type": "array"
+        },
+        "timestep": {
+          "default": 0.005,
+          "maximum": 0.02,
+          "minimum": 0.0001,
+          "title": "Timestep",
+          "type": "number"
+        },
+        "substeps": {
+          "default": 4,
+          "maximum": 100,
+          "minimum": 1,
+          "title": "Substeps",
+          "type": "integer"
+        },
+        "iterations": {
+          "default": 50,
+          "maximum": 500,
+          "minimum": 1,
+          "title": "Iterations",
+          "type": "integer"
+        },
+        "integrator": {
+          "default": "implicitfast",
+          "enum": [
+            "implicitfast",
+            "Euler",
+            "RK4",
+            "implicit"
+          ],
+          "title": "Integrator",
+          "type": "string"
+        },
+        "solver": {
+          "default": "Newton",
+          "enum": [
+            "Newton",
+            "CG",
+            "PGS"
+          ],
+          "title": "Solver",
+          "type": "string"
+        },
+        "tolerance": {
+          "default": 1e-08,
+          "maximum": 0.1,
+          "minimum": 1e-12,
+          "title": "Tolerance",
+          "type": "number"
+        },
+        "friction": {
+          "default": 1.0,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Friction",
+          "type": "number"
+        },
+        "friction_torsional": {
+          "default": 0.005,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Friction Torsional",
+          "type": "number"
+        },
+        "friction_rolling": {
+          "default": 0.0001,
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Friction Rolling",
+          "type": "number"
+        },
+        "contact_dimension": {
+          "default": 6,
+          "description": "1 frictionless; 3 sliding; 4 adds torsional; 6 adds rolling friction.",
+          "enum": [
+            1,
+            3,
+            4,
+            6
+          ],
+          "title": "Contact Dimension",
+          "type": "integer"
+        },
+        "contact_timeconst": {
+          "default": 0.01,
+          "maximum": 1,
+          "minimum": 0.0001,
+          "title": "Contact Timeconst",
+          "type": "number"
+        },
+        "contact_dampratio": {
+          "default": 1.0,
+          "maximum": 10,
+          "minimum": 0.01,
+          "title": "Contact Dampratio",
+          "type": "number"
+        },
+        "density": {
+          "default": 1.225,
+          "maximum": 2000,
+          "minimum": 0,
+          "title": "Density",
+          "type": "number"
+        },
+        "viscosity": {
+          "default": 1.81e-05,
+          "maximum": 100,
+          "minimum": 0,
+          "title": "Viscosity",
+          "type": "number"
+        },
+        "wind": {
+          "items": {
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Wind",
+          "type": "array"
+        }
+      },
+      "title": "PhysicsConfig",
+      "type": "object"
+    },
+    "RobotConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "default": "car",
+          "enum": [
+            "car",
+            "quadruped",
+            "aircraft",
+            "none"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "position": {
+          "items": {
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Position",
+          "type": "array"
+        },
+        "rotation": {
+          "description": "Initial XYZ Euler angles, radians.",
+          "items": {
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Rotation",
+          "type": "array"
+        },
+        "velocity": {
+          "description": "Initial world-frame linear velocity, metres per second.",
+          "items": {
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Velocity",
+          "type": "array"
+        },
+        "angular_velocity": {
+          "description": "Initial body-frame angular velocity, radians per second.",
+          "items": {
+            "maximum": 1000000.0,
+            "minimum": -1000000.0,
+            "type": "number"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "title": "Angular Velocity",
+          "type": "array"
+        },
+        "mass": {
+          "default": 8.0,
+          "maximum": 10000,
+          "minimum": 0.05,
+          "title": "Mass",
+          "type": "number"
+        },
+        "motor_strength": {
+          "default": 20.0,
+          "exclusiveMinimum": 0,
+          "maximum": 10000,
+          "title": "Motor Strength",
+          "type": "number"
+        },
+        "aero_coefficients": {
+          "description": "Ellipsoid aerodynamic coefficients: blunt drag, slender drag, angular drag, Kutta lift, Magnus lift.",
+          "items": {
+            "maximum": 100,
+            "minimum": 0,
+            "type": "number"
+          },
+          "maxItems": 5,
+          "minItems": 5,
+          "title": "Aero Coefficients",
+          "type": "array"
+        }
+      },
+      "title": "RobotConfig",
+      "type": "object"
+    },
+    "TerrainConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "default": "flat",
+          "enum": [
+            "flat",
+            "rough",
+            "stairs"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "size": {
+          "items": {
+            "maximum": 500,
+            "minimum": 2,
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Size",
+          "type": "array"
+        },
+        "roughness": {
+          "default": 0.15,
+          "maximum": 2,
+          "minimum": 0,
+          "title": "Roughness",
+          "type": "number"
+        },
+        "seed": {
+          "default": 0,
+          "maximum": 4294967295,
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        }
+      },
+      "title": "TerrainConfig",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "default": "Untitled world",
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "robot": {
+      "$ref": "#/$defs/RobotConfig"
+    },
+    "physics": {
+      "$ref": "#/$defs/PhysicsConfig"
+    },
+    "terrain": {
+      "$ref": "#/$defs/TerrainConfig"
+    },
+    "objects": {
+      "items": {
+        "$ref": "#/$defs/ObjectConfig"
+      },
+      "maxItems": 200,
+      "title": "Objects",
+      "type": "array"
+    },
+    "max_episode_steps": {
+      "default": 2000,
+      "maximum": 1000000,
+      "minimum": 1,
+      "title": "Max Episode Steps",
+      "type": "integer"
+    }
+  },
+  "title": "SceneConfig",
+  "type": "object"
+}

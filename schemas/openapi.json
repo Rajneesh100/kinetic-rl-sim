@@ -1,0 +1,1356 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Kinetic RL Sim",
+    "description": "Explicit, fixed-time-step physics. Units: SI; coordinates: z-up; quaternions: wxyz.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/api/v1/health": {
+      "get": {
+        "summary": "Health",
+        "operationId": "health_api_v1_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/templates": {
+      "get": {
+        "summary": "List Templates",
+        "operationId": "list_templates_api_v1_templates_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/schema": {
+      "get": {
+        "summary": "Schema",
+        "operationId": "schema_api_v1_schema_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/worlds": {
+      "get": {
+        "summary": "List Worlds",
+        "operationId": "list_worlds_api_v1_worlds_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create World",
+        "operationId": "create_world_api_v1_worlds_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorldRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/worlds/{key}": {
+      "get": {
+        "summary": "Get World",
+        "operationId": "get_world_api_v1_worlds__key__get",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete World",
+        "operationId": "delete_world_api_v1_worlds__key__delete",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/worlds/{key}/state": {
+      "get": {
+        "summary": "Get State",
+        "operationId": "get_state_api_v1_worlds__key__state_get",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/worlds/{key}/scene": {
+      "put": {
+        "summary": "Replace Scene",
+        "operationId": "replace_scene_api_v1_worlds__key__scene_put",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SceneConfig"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/worlds/{key}/reset": {
+      "post": {
+        "summary": "Reset World",
+        "operationId": "reset_world_api_v1_worlds__key__reset_post",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/worlds/{key}/step": {
+      "post": {
+        "summary": "Step World",
+        "operationId": "step_world_api_v1_worlds__key__step_post",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StepRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/scenes": {
+      "get": {
+        "summary": "List Scenes",
+        "operationId": "list_scenes_api_v1_scenes_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Save Scene",
+        "operationId": "save_scene_api_v1_scenes_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SceneConfig"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fluid/schema": {
+      "get": {
+        "summary": "Fluid Schema",
+        "operationId": "fluid_schema_api_v1_fluid_schema_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fluids": {
+      "post": {
+        "summary": "Create Fluid",
+        "operationId": "create_fluid_api_v1_fluids_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FluidConfig"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fluids/{key}/step": {
+      "post": {
+        "summary": "Step Fluid",
+        "operationId": "step_fluid_api_v1_fluids__key__step_post",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FluidStepRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fluids/{key}/reset": {
+      "post": {
+        "summary": "Reset Fluid",
+        "operationId": "reset_fluid_api_v1_fluids__key__reset_post",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/fluids/{key}": {
+      "delete": {
+        "summary": "Delete Fluid",
+        "operationId": "delete_fluid_api_v1_fluids__key__delete",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Key"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FluidConfig": {
+        "properties": {
+          "resolution": {
+            "type": "integer",
+            "maximum": 128.0,
+            "minimum": 16.0,
+            "title": "Resolution",
+            "default": 64
+          },
+          "timestep": {
+            "type": "number",
+            "maximum": 0.1,
+            "minimum": 0.001,
+            "title": "Timestep",
+            "default": 0.02
+          },
+          "viscosity": {
+            "type": "number",
+            "maximum": 0.1,
+            "minimum": 0.0,
+            "title": "Viscosity",
+            "default": 0.0001
+          },
+          "diffusion": {
+            "type": "number",
+            "maximum": 0.1,
+            "minimum": 0.0,
+            "title": "Diffusion",
+            "default": 1e-05
+          },
+          "inflow": {
+            "type": "number",
+            "maximum": 3.0,
+            "minimum": 0.0,
+            "title": "Inflow",
+            "default": 0.6
+          },
+          "dye_source": {
+            "type": "number",
+            "maximum": 20.0,
+            "minimum": 0.0,
+            "title": "Dye Source",
+            "default": 2.0
+          },
+          "source_x": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Source X",
+            "default": 0.12
+          },
+          "source_y": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Source Y",
+            "default": 0.5
+          },
+          "source_radius": {
+            "type": "number",
+            "maximum": 0.3,
+            "minimum": 0.01,
+            "title": "Source Radius",
+            "default": 0.06
+          },
+          "source_mode": {
+            "type": "string",
+            "enum": [
+              "jet",
+              "rake"
+            ],
+            "title": "Source Mode",
+            "description": "Jet uses the circular source. Rake emits nine horizontal dye stripes near source_x, spanning y=0.1 to 0.9.",
+            "default": "jet"
+          },
+          "dissipation": {
+            "type": "number",
+            "maximum": 5.0,
+            "minimum": 0.0,
+            "title": "Dissipation",
+            "default": 0.03
+          },
+          "obstacle": {
+            "type": "boolean",
+            "title": "Obstacle",
+            "default": true
+          },
+          "obstacle_x": {
+            "type": "number",
+            "maximum": 0.95,
+            "minimum": 0.05,
+            "title": "Obstacle X",
+            "default": 0.45
+          },
+          "obstacle_y": {
+            "type": "number",
+            "maximum": 0.95,
+            "minimum": 0.05,
+            "title": "Obstacle Y",
+            "default": 0.5
+          },
+          "obstacle_radius": {
+            "type": "number",
+            "maximum": 0.3,
+            "minimum": 0.01,
+            "title": "Obstacle Radius",
+            "default": 0.1
+          },
+          "obstacles": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/FluidObstacle"
+                },
+                "type": "array",
+                "maxItems": 16
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Obstacles",
+            "description": "Explicit obstacle objects. Null uses the legacy circle controls; an empty list creates a clean channel. Each object must occupy at least four grid cell centers and leave the outer cell ring fluid."
+          },
+          "iterations": {
+            "type": "integer",
+            "maximum": 200.0,
+            "minimum": 10.0,
+            "title": "Iterations",
+            "default": 60
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "FluidConfig"
+      },
+      "FluidObstacle": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 64,
+            "minLength": 1,
+            "title": "Name"
+          },
+          "shape": {
+            "type": "string",
+            "enum": [
+              "circle",
+              "box",
+              "ellipse",
+              "naca0012",
+              "naca2412",
+              "polygon"
+            ],
+            "title": "Shape",
+            "default": "circle"
+          },
+          "x": {
+            "type": "number",
+            "exclusiveMaximum": 1.0,
+            "exclusiveMinimum": 0.0,
+            "title": "X",
+            "default": 0.45
+          },
+          "y": {
+            "type": "number",
+            "exclusiveMaximum": 1.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Y",
+            "default": 0.5
+          },
+          "width": {
+            "type": "number",
+            "maximum": 0.9,
+            "minimum": 0.01,
+            "title": "Width",
+            "description": "Diameter, full box/ellipse width, or airfoil chord in unit-domain coordinates.",
+            "default": 0.2
+          },
+          "height": {
+            "type": "number",
+            "maximum": 0.9,
+            "minimum": 0.01,
+            "title": "Height",
+            "description": "Full box/ellipse/polygon height. Ignored for circles and fixed 12%-chord NACA profiles.",
+            "default": 0.2
+          },
+          "angle": {
+            "type": "number",
+            "maximum": 180.0,
+            "minimum": -180.0,
+            "title": "Angle",
+            "description": "Counterclockwise rotation in degrees about (x,y).",
+            "default": 0.0
+          },
+          "points": {
+            "anyOf": [
+              {
+                "items": {
+                  "items": {
+                    "type": "number",
+                    "maximum": 0.5,
+                    "minimum": -0.5
+                  },
+                  "type": "array",
+                  "maxItems": 2,
+                  "minItems": 2
+                },
+                "type": "array",
+                "maxItems": 64,
+                "minItems": 3
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Points",
+            "description": "Simple polygon vertices in local [-0.5,0.5] coordinates, scaled by width/height. Do not repeat the first vertex."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "FluidObstacle"
+      },
+      "FluidStepRequest": {
+        "properties": {
+          "steps": {
+            "type": "integer",
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Steps",
+            "default": 1
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "FluidStepRequest"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "ObjectConfig": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1,
+            "pattern": "^[A-Za-z][A-Za-z0-9 _.-]*$",
+            "title": "Name"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "box",
+              "sphere",
+              "cylinder",
+              "capsule"
+            ],
+            "title": "Kind",
+            "default": "box"
+          },
+          "size": {
+            "items": {
+              "type": "number",
+              "maximum": 1000.0,
+              "exclusiveMinimum": 0.0
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Size",
+            "description": "MuJoCo sizes: box half-extents; sphere radius=size[0]; cylinder/capsule radius=size[0], half-length=size[1]."
+          },
+          "position": {
+            "items": {
+              "type": "number",
+              "maximum": 1000000.0,
+              "minimum": -1000000.0
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Position"
+          },
+          "rotation": {
+            "items": {
+              "type": "number",
+              "maximum": 1000000.0,
+              "minimum": -1000000.0
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Rotation",
+            "description": "XYZ Euler angles, radians."
+          },
+          "mass": {
+            "type": "number",
+            "maximum": 100000.0,
+            "minimum": 0.001,
+            "title": "Mass",
+            "default": 1.0
+          },
+          "static": {
+            "type": "boolean",
+            "title": "Static",
+            "default": false
+          },
+          "color": {
+            "items": {
+              "type": "number",
+              "maximum": 1.0,
+              "minimum": 0.0
+            },
+            "type": "array",
+            "maxItems": 4,
+            "minItems": 4,
+            "title": "Color"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "ObjectConfig"
+      },
+      "PhysicsConfig": {
+        "properties": {
+          "gravity": {
+            "items": {
+              "type": "number",
+              "maximum": 1000000.0,
+              "minimum": -1000000.0
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Gravity"
+          },
+          "timestep": {
+            "type": "number",
+            "maximum": 0.02,
+            "minimum": 0.0001,
+            "title": "Timestep",
+            "default": 0.005
+          },
+          "substeps": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Substeps",
+            "default": 4
+          },
+          "iterations": {
+            "type": "integer",
+            "maximum": 500.0,
+            "minimum": 1.0,
+            "title": "Iterations",
+            "default": 50
+          },
+          "integrator": {
+            "type": "string",
+            "enum": [
+              "implicitfast",
+              "Euler",
+              "RK4",
+              "implicit"
+            ],
+            "title": "Integrator",
+            "default": "implicitfast"
+          },
+          "solver": {
+            "type": "string",
+            "enum": [
+              "Newton",
+              "CG",
+              "PGS"
+            ],
+            "title": "Solver",
+            "default": "Newton"
+          },
+          "tolerance": {
+            "type": "number",
+            "maximum": 0.1,
+            "minimum": 1e-12,
+            "title": "Tolerance",
+            "default": 1e-08
+          },
+          "friction": {
+            "type": "number",
+            "maximum": 10.0,
+            "minimum": 0.0,
+            "title": "Friction",
+            "default": 1.0
+          },
+          "friction_torsional": {
+            "type": "number",
+            "maximum": 10.0,
+            "minimum": 0.0,
+            "title": "Friction Torsional",
+            "default": 0.005
+          },
+          "friction_rolling": {
+            "type": "number",
+            "maximum": 10.0,
+            "minimum": 0.0,
+            "title": "Friction Rolling",
+            "default": 0.0001
+          },
+          "contact_dimension": {
+            "type": "integer",
+            "enum": [
+              1,
+              3,
+              4,
+              6
+            ],
+            "title": "Contact Dimension",
+            "description": "1 frictionless; 3 sliding; 4 adds torsional; 6 adds rolling friction.",
+            "default": 6
+          },
+          "contact_timeconst": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0001,
+            "title": "Contact Timeconst",
+            "default": 0.01
+          },
+          "contact_dampratio": {
+            "type": "number",
+            "maximum": 10.0,
+            "minimum": 0.01,
+            "title": "Contact Dampratio",
+            "default": 1.0
+          },
+          "density": {
+            "type": "number",
+            "maximum": 2000.0,
+            "minimum": 0.0,
+            "title": "Density",
+            "default": 1.225
+          },
+          "viscosity": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Viscosity",
+            "default": 1.81e-05
+          },
+          "wind": {
+            "items": {
+              "type": "number",
+              "maximum": 1000000.0,
+              "minimum": -1000000.0
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Wind"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "PhysicsConfig"
+      },
+      "ResetRequest": {
+        "properties": {
+          "seed": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 4294967295.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seed"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "ResetRequest"
+      },
+      "RobotConfig": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "car",
+              "quadruped",
+              "aircraft",
+              "none"
+            ],
+            "title": "Kind",
+            "default": "car"
+          },
+          "position": {
+            "items": {
+              "type": "number",
+              "maximum": 1000000.0,
+              "minimum": -1000000.0
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Position"
+          },
+          "rotation": {
+            "items": {
+              "type": "number",
+              "maximum": 1000000.0,
+              "minimum": -1000000.0
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Rotation",
+            "description": "Initial XYZ Euler angles, radians."
+          },
+          "velocity": {
+            "items": {
+              "type": "number",
+              "maximum": 1000000.0,
+              "minimum": -1000000.0
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Velocity",
+            "description": "Initial world-frame linear velocity, metres per second."
+          },
+          "angular_velocity": {
+            "items": {
+              "type": "number",
+              "maximum": 1000000.0,
+              "minimum": -1000000.0
+            },
+            "type": "array",
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Angular Velocity",
+            "description": "Initial body-frame angular velocity, radians per second."
+          },
+          "mass": {
+            "type": "number",
+            "maximum": 10000.0,
+            "minimum": 0.05,
+            "title": "Mass",
+            "default": 8.0
+          },
+          "motor_strength": {
+            "type": "number",
+            "maximum": 10000.0,
+            "exclusiveMinimum": 0.0,
+            "title": "Motor Strength",
+            "default": 20.0
+          },
+          "aero_coefficients": {
+            "items": {
+              "type": "number",
+              "maximum": 100.0,
+              "minimum": 0.0
+            },
+            "type": "array",
+            "maxItems": 5,
+            "minItems": 5,
+            "title": "Aero Coefficients",
+            "description": "Ellipsoid aerodynamic coefficients: blunt drag, slender drag, angular drag, Kutta lift, Magnus lift."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "RobotConfig"
+      },
+      "SceneConfig": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Name",
+            "default": "Untitled world"
+          },
+          "robot": {
+            "$ref": "#/components/schemas/RobotConfig"
+          },
+          "physics": {
+            "$ref": "#/components/schemas/PhysicsConfig"
+          },
+          "terrain": {
+            "$ref": "#/components/schemas/TerrainConfig"
+          },
+          "objects": {
+            "items": {
+              "$ref": "#/components/schemas/ObjectConfig"
+            },
+            "type": "array",
+            "maxItems": 200,
+            "title": "Objects"
+          },
+          "max_episode_steps": {
+            "type": "integer",
+            "maximum": 1000000.0,
+            "minimum": 1.0,
+            "title": "Max Episode Steps",
+            "default": 2000
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "SceneConfig"
+      },
+      "StepRequest": {
+        "properties": {
+          "action": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Action"
+          },
+          "frames": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 100.0,
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Frames"
+          },
+          "demo": {
+            "type": "boolean",
+            "title": "Demo",
+            "default": false
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "StepRequest"
+      },
+      "TerrainConfig": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "flat",
+              "rough",
+              "stairs"
+            ],
+            "title": "Kind",
+            "default": "flat"
+          },
+          "size": {
+            "items": {
+              "type": "number",
+              "maximum": 500.0,
+              "minimum": 2.0
+            },
+            "type": "array",
+            "maxItems": 2,
+            "minItems": 2,
+            "title": "Size"
+          },
+          "roughness": {
+            "type": "number",
+            "maximum": 2.0,
+            "minimum": 0.0,
+            "title": "Roughness",
+            "default": 0.15
+          },
+          "seed": {
+            "type": "integer",
+            "maximum": 4294967295.0,
+            "minimum": 0.0,
+            "title": "Seed",
+            "default": 0
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "TerrainConfig"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      },
+      "WorldRequest": {
+        "properties": {
+          "template": {
+            "type": "string",
+            "title": "Template",
+            "default": "driving"
+          },
+          "scene": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SceneConfig"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "title": "WorldRequest"
+      }
+    }
+  }
+}
